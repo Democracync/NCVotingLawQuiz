@@ -4412,10 +4412,16 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 a.topBar-link {
   color: #fff;
   text-decoration: underline;
-  line-height: 40px; }
+  line-height: 40px;
+  cursor: pointer; }
   a.topBar-link:hover {
     opacity: 0.8;
     filter: alpha(opacity=80); }
+  a.topBar-link.left {
+    text-align: left; }
+  a.topBar-link.right {
+    text-align: right;
+    float: right; }
   @media (max-width: 798px) {
     a.topBar-link {
       font-size: 18px; } }
@@ -4428,6 +4434,54 @@ p.topBar-name {
     p.topBar-name {
       text-align: center;
       font-weight: bold; } }
+
+/******** Welcome Page *********/
+.welcomeContainer {
+  background: transparent; }
+  .welcomeContainer h2 {
+    color: #b7423a;
+    font-size: 42px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 25px; }
+  .welcomeContainer h1 {
+    font-size: 70px;
+    text-align: center;
+    color: #3a4d51;
+    margin-top: 50px;
+    margin-bottom: 5px; }
+  .welcomeContainer p {
+    max-width: 90%;
+    margin: 10px auto; }
+
+p.ready {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 32px; }
+
+a.takeQuizButton {
+  display: block;
+  max-width: 285px;
+  margin: 20px auto;
+  padding: 10px 15px;
+  font-size: 38px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #7ea033;
+  border: 3px solid #b3c68b;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px; }
+  a.takeQuizButton:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    filter: alpha(opacity=80); }
+  a.takeQuizButton:active {
+    position: relative;
+    top: 1px; }
 
 /******** Question Area ********/
 h2.questionNumber {
@@ -4519,8 +4573,9 @@ button.quizAnswer:active {
 
 /* Score Page Styles */
 .scoreContainer {
-  background: transparent; }
-  .scoreContainer h1.yourScore {
+  background: transparent;
+  margin-bottom: 40px; }
+  .scoreContainer h1 {
     font-size: 70px;
     text-align: center;
     color: #3a4d51;
@@ -4610,6 +4665,16 @@ h2#myHashtag {
   color: #3a4d51;
   text-align: center;
   font-size: 24px; }
+  .shareText input {
+    width: 320px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid #9ca6a8;
+    text-align: center;
+    font-size: 20px;
+    font-weight: normal; }
 
 ul.shareIcons {
   list-style: none;

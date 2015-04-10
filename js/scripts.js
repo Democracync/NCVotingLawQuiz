@@ -329,3 +329,24 @@ function resultAnalysis() {
   }
 
 }
+
+
+// Abandon quiz prompts. Would like to combine them into one function that grabs the URL at some point...
+
+function goHome() {
+  var leave = window.confirm("Are you sure you want to abandon the quiz?");
+
+  if (leave == true){
+    location.assign("http://www.democracy-nc.org/VotingLawQuiz/");
+  } else {
+  }
+}
+
+function goDemnc() {
+  var leave = window.confirm("Are you sure you want to abandon the quiz?");
+
+  if (leave == true){
+    location.assign("http://www.democracy-nc.org/");
+  } else {
+  }
+}

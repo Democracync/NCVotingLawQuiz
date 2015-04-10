@@ -48,7 +48,10 @@ a.topBar-link {
   color: #fff;
   text-decoration: underline;
   line-height: 40px;
+  cursor: pointer;
   &:hover {@include opacity(.8);}
+  &.left {text-align: left;}
+  &.right{text-align: right; float: right;}
   @media (max-width: 798px){
     font-size: 18px;
   }
@@ -62,6 +65,60 @@ p.topBar-name {
     font-weight: bold;
   }
 }
+
+/******** Welcome Page *********/
+.welcomeContainer {
+  background: transparent;
+  & h2 {
+    color: $red;
+    font-size: 42px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 25px;
+  }
+  & h1 {
+    font-size: 70px;
+    text-align: center;
+    color: $dark-blue;
+    margin-top: 50px;
+    margin-bottom: 5px;
+  }
+  & p {
+    max-width: 90%;
+    margin: 10px auto;
+  }
+}
+
+p.ready {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+a.takeQuizButton {
+  display: block;
+  max-width: 285px;
+  margin: 20px auto;
+  padding: 10px 15px;
+  font-size: 38px;
+  font-weight: bold;
+  color: #fff;
+  background-color: $green;
+  border: 3px solid $light-green;
+  @include border-radius(5px);
+  &:hover {
+    text-decoration: none;
+    @include opacity(.8);
+  }
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+}
+
+
 
 /******** Question Area ********/
 h2.questionNumber {
@@ -147,7 +204,8 @@ button.quizAnswer:active {
 /* Score Page Styles */
 .scoreContainer {
   background: transparent;
-  & h1.yourScore {
+  margin-bottom: 40px;
+  & h1 {
     font-size: 70px;
     text-align: center;
     color: $dark-blue;
@@ -246,6 +304,14 @@ h2#myHashtag {
   color: $dark-blue;
   text-align: center;
   font-size: 24px;
+  & input {
+    width: 320px;
+    @include border-radius(5px);
+    border: 2px solid $light-gray;
+    text-align: center;
+    font-size: 20px;
+    font-weight: normal;
+  }
 }
 
 ul.shareIcons {
