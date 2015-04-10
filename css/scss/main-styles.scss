@@ -1,0 +1,286 @@
+@import 'vars';
+@import 'mixins';
+@import 'bootstrap';
+@import 'icons';
+
+/*********************
+***** Our Stuff ******
+*********************/
+/******** Global ********/
+.show-block {
+  display: block;
+  visibility: visible;
+  @include transition(all .5s ease);
+}
+.show-inline {
+  display: inline;
+  visibility: visible;
+  @include transition(all .5s ease);
+}
+.hide {
+  display: block;
+  @include opacity(0);
+  @include transition(all .8s ease);
+}
+
+.main-wrapper {
+  width: 100%;
+  min-height: 100%;
+  display: table;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  margin-bottom: -40px;
+}
+
+/******** Top Bar ********/
+.topBar {
+  background-color: $blue;
+  color: #fff;
+  height: 40px;
+  margin-bottom: 30px;
+  @media (max-width: 798px){
+    height: 90px;
+    text-align: center;
+  }
+}
+a.topBar-link {
+  color: #fff;
+  text-decoration: underline;
+  line-height: 40px;
+  &:hover {@include opacity(.8);}
+  @media (max-width: 798px){
+    font-size: 18px;
+  }
+}
+p.topBar-name {
+  width: 100%;
+  text-align: right;
+  line-height: 40px;
+  @media (max-width: 798px){
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+/******** Question Area ********/
+h2.questionNumber {
+  color: $red;
+  font-size: 42px;
+  text-align: center;
+}
+%contentBox {
+  color: #fff;
+  @include border-radius(5px);
+  margin-top: 15px;
+  padding: 20px;
+}
+.questionBox {
+  @extend %contentBox;
+  background-color: $dark-gray;
+  border: 4px solid $light-gray;
+  font-size: 24px;
+}
+#explainBox {
+  visibility: hidden;
+  @extend %contentBox;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  &.wrong {
+    background-color: $red;
+    border: 4px solid $light-red;
+  }
+  &.right {
+  background-color: $green;
+  border: 4px solid $light-green;
+  }
+  & #explanation {display: inline;}
+  & #right-wrong {font-weight: bold;}
+
+  & a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  & a:hover {
+    @include opacity(.7);
+  }
+}
+p.q {margin: 15px 0 30px 0;}
+
+button.quizAnswer {
+  width: 90%;
+  background: #fff;
+  @include border-radius(5px);
+  color: $blue;
+  margin: 15px auto;
+  display: block;
+  text-align: left;
+  border: none;
+  padding: 7px 40px 7px 15px;
+  &:hover {@include opacity(.8);}
+  &.xMark {background: #fff url('../img/button-xmark.png') top right no-repeat; @include transition("all .5s ease");}
+  &.checkMark {background: #fff url('../img/button-checkmark.png') top right no-repeat;}
+  &.noMark {background: #fff; background-image: none;}
+}
+button.quizAnswer:active {
+  position: relative;
+  top: 1px;
+}
+
+#nextButton {
+  margin: 30px auto 15px auto;
+  color: #fff;
+  text-align: center;
+  display: none;
+  visibility: hidden;
+  width: auto;
+  &:hover {
+    @include opacity(.7);
+  }
+}
+
+#finishButton {
+  @extend #nextButton;
+}
+
+
+/* Score Page Styles */
+.scoreContainer {
+  background: transparent;
+  & h1.yourScore {
+    font-size: 70px;
+    text-align: center;
+    color: $dark-blue;
+    margin-top: 50px;
+    }
+}
+
+.scoreBox {
+  max-width: 400px;
+  background-color: #fff;
+  border: 8px solid $dark-blue;
+  padding: 0;
+  margin: 20px auto;
+  @include border-radius(5px);
+  clear: both;
+}
+
+.scoreBoxRight, .scoreBoxLeft {
+  min-height: 90px;
+  margin: 0;
+  width: 49.9%;
+  display: inline;
+  box-sizing: border-box;
+  float: left;
+}
+
+.scoreBoxRight {
+  border-left: 8px solid $dark-blue;
+  background: transparent url('../img/huge-xmark.png') no-repeat left;
+  @media (max-width: 420px) {
+    background-image: url('../img/med-xmark.png');
+  }
+}
+.scoreBoxLeft {
+  background: transparent url('../img/huge-checkmark.png') no-repeat left;
+  @media (max-width: 420px) {
+    background-image: url('../img/med-checkmark.png');
+  }
+}
+
+h2#correctNumber, h2#incorrectNumber {
+  color: $dark-blue;
+  font-size: 60px;
+  line-height: 90px;
+  margin: 0;
+  padding-left: 110px;
+
+  @media (max-width: 420px) {
+      padding-left: 80px;
+      font-size: 56px;
+  }
+}
+
+h2#myHashtag {
+  border-top: 8px solid $dark-blue;
+  text-align: center;
+  font-size: 48px;
+  font-family: $primary-font;
+  line-height: 50px;
+  color: $red;
+  margin: 0;
+  padding: 10px 0;
+  width: 100%;
+  &.greenText {color: $green;}
+  @media (max-width: 420px) {
+    font-size: 36px;
+    line-height: 36px;
+  }
+}
+
+#analysisBox {
+  @extend %contentBox;
+  font-size: 32px;
+  text-align: center;
+  margin-top: 25px;
+  font-weight: bold;
+  &.wrong {
+    background-color: $red;
+    border: 4px solid $light-red;
+  }
+  &.right {
+  background-color: $green;
+  border: 4px solid $light-green;
+  }
+  & a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  & a:hover {
+    @include opacity(.7);
+  }
+}
+
+.shareText {
+  margin-top: 35px;
+  color: $dark-blue;
+  text-align: center;
+  font-size: 24px;
+}
+
+ul.shareIcons {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  margin-top: 25px;
+}
+ul.shareIcons li {
+  display: inline;
+  padding: 20px;
+}
+
+footer {
+  width: 100%;
+  background: transparent;
+  margin-top: 50px;
+  padding: 10px 25px;
+  float: left;
+  font-size: 16px;
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  @media (max-width: 1152px) {
+    position: relative;
+  }
+  @media (max-width: 500px) {
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+footer, .main-wrapper:after {
+  height: 40px;
+}
+p.copyright {
+  margin: 0;
+}

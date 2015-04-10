@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+</head>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <div id = "frame"
+    role = "content" >
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript">
+     var quiztitle = "NC's New Voting Law Quiz";
+
+
+ var quiz = [
+         {
+             "question" : "When will the photo ID requirement be implemented?",
+             "choices" : [
+                                     "November 2015",
+                                     "January 2016",
+                                     "November 2016",
+                                     "It was implemented in 2014"
+                                 ],
+             "correct" : "January 2016",
+             "explanation" : "Albert Einstein drafted the special theory of relativity in 1905.",
+         },
+         {
+             "question" : "Which of the following will NOT be accepted as a photo ID?",
+             "choices" : [
+                                     "Passport",
+                                     "Learner’s permit",
+                                     "Student ID",
+                                     "Veteran’s ID"
+                                 ],
+             "correct" : "Student ID",
+             "explanation" : "The two dollar bill is seldom seen in circulation. As a result, some businesses are confused when presented with the note.",
+         },
+         {
+             "question" : "In order to vote on Election Day, when do you need register?",
+             "choices" : [
+                                     "30 days before Election Day",
+                                     "25 days before Election Day",
+                                     "14 days before Election Day",
+                                     "You can register during Early Voting."
+                                 ],
+             "correct" : "25 days before Election Day",
+             "explanation" : "South Carolina came under attack when Confederate soldiers attacked Fort Sumter. The war lasted until April 9th 1865.",
+         },
+
+
+     ];
+
+
+ var currentquestion = 0,
+     score = 0,
+     submt = true,
+     picked;
+
+     $(document).ready(function(){
+       $("#submitbutton").hide();
+
+     function htmlEncode(value) {
+         return $(document.createElement('div')).text(value).html();
+     }
+
+
+     function addChoices(choices) {
+         if (typeof choices !== "undefined" && $.type(choices) == "array") {
+             $('#choice-block').empty();
+             for (var i = 0; i < choices.length; i++) {
+                 $(document.createElement('li')).addClass('choice choice-box').attr('data-index', i).text(choices[i]).appendTo('#choice-block');
+             }
+         }
+     }
+
+     function nextQuestion() {
+         submt = true;
+         //alert("nQ");
+         $('#explanation').empty();
+         $('#question').text(quiz[currentquestion]['question']);
+         $('#pager').text('Question ' + Number(currentquestion + 1) + ' of ' + '5');
+         if (quiz[currentquestion].hasOwnProperty('image') && quiz[currentquestion]['image'] != "") {
+             if ($('#question-image').length == 0) {
+                 $(document.createElement('img')).addClass('question-image').attr('id', 'question-image').attr('src', quiz[currentquestion]['image']).attr('alt', htmlEncode(quiz[currentquestion]['question'])).insertAfter('#question');
+             } else {
+                 $('#question-image').attr('src', quiz[currentquestion]['image']).attr('alt', htmlEncode(quiz[currentquestion]['question']));
+             }
+         } else {
+             $('#question-image').remove();
+         }
+         addChoices(quiz[currentquestion]['choices']);
+         setupButtons();
+
+
+     }
+
+     function nextQuestionButton() {
+
+
+     }
+
+
+     function processQuestion() {
+
+         //alert(choice);
+         currentquestion++;
+          //alert(currentquestion);
+         $("#submitbutton").hide();
+
+             if (currentquestion == 5) {
+                 endQuiz();
+             } else {
+
+                 nextQuestion();
+             }
+
+     }
+
+
+     function setupButtons() {
+         $('.choice').on('mouseover', function () {
+             $(this).css({
+                 'background-color': '#e1e1e1'
+             });
+         });
+         $('.choice').on('mouseout', function () {
+             $(this).css({
+                 'background-color': '#fff'
+             });
+         })
+         $('.choice').on('click', function () {
+             //alert("");
+             choice = $(this).attr('data-index');
+             $('.choice').removeAttr('style').off('mouseout mouseover');
+             $(this).css({
+                 'border-color': '#222',
+                 'font-weight': 700,
+                 'background-color': '#c1c1c1'
+             });
+             if (quiz[currentquestion]['choices'][choice] == quiz[currentquestion]['correct']) {
+             $('.choice').eq(choice).css({
+                 'background-color': '#50D943'
+             });
+             $('#explanation').html('<strong>Correct!</strong> ' + htmlEncode(quiz[currentquestion]['explanation']));
+             score++;
+         } else {
+             $('.choice').eq(choice).css({
+                 'background-color': '#D92623'
+             });
+             $('#explanation').html('<strong>Incorrect.</strong> ' + htmlEncode(quiz[currentquestion]['explanation']));
+         }
+
+             if (submt) {
+                 //alert("submit");
+                 submt = false;
+
+                setTimeout(processQuestion,3000);
+
+             }
+         })
+     }
+
+
+     function endQuiz() {
+         $('#explanation').empty();
+         $('#question').empty();
+         $('#choice-block').empty();
+         $('#submitbutton').remove();
+         $('#question').text("You got " + score + " out of " + quiz.length + " correct.");
+         $(document.createElement('h2')).css({
+             'text-align': 'center',
+             'font-size': '4em'
+         }).text(Math.round(score / quiz.length * 100) + '%').insertAfter('#question');
+
+         var result = Math.round(score / quiz.length * 100);
+         var g = document.createElement('img');
+          g.id = 'imgId';
+          $(g).css({
+             'height':'100px',
+             'width': '100px',
+             'margin-left':'40%'
+         }).insertAfter('#explanation');
+
+         if(result < 33){
+            $("#imgId").attr("src","http://www.chaaps.com/wp-content/uploads/2010/07/fail.jpg");
+         }
+         else if(result < 67){
+            $("#imgId").attr("src","http://www.ytechie.com/2008/04/how-does-your-boss-know-youre-doing-a-great-job/good-job.png");
+         }
+          else if(result < 100){
+            $("#imgId").attr("src","http://www.ytechie.com/2008/04/how-does-your-boss-know-youre-doing-a-great-job/good-job.png");
+         }
+         else if(result == 100){
+            $("#imgId").attr("src","http://www.getaheadinmarketing.com/wp-content/themes/myjournal/js/timthumb.php?src=http://www.getaheadinmarketing.com/wp-content/uploads/evaluation-tick.jpg&w=653&h=260");
+         }
+     }
+
+
+     function init() {
+         //add title
+         if (typeof quiztitle !== "undefined" && $.type(quiztitle) === "string") {
+             $(document.createElement('h1')).text(quiztitle).appendTo('#frame');
+         } else {
+             $(document.createElement('h1')).text("Quiz").appendTo('#frame');
+         }
+
+         //add pager and questions
+         if (typeof quiz !== "undefined" && $.type(quiz) === "array") {
+             //add pager
+             $(document.createElement('p')).addClass('pager').attr('id', 'pager').text('Question 1 of ' + 5).appendTo('#frame');
+             //add first question
+             $(document.createElement('h2')).addClass('question').attr('id', 'question').text(quiz[0]['question']).appendTo('#frame');
+             //add image if present
+             if (quiz[0].hasOwnProperty('image') && quiz[0]['image'] != "") {
+                 $(document.createElement('img')).addClass('question-image').attr('id', 'question-image').attr('src', quiz[0]['image']).attr('alt', htmlEncode(quiz[0]['question'])).appendTo('#frame');
+             }
+
+             //questions holder
+             $(document.createElement('ul')).attr('id', 'choice-block').appendTo('#frame');
+
+             //add choices
+             addChoices(quiz[0]['choices']);
+
+              $(document.createElement('p')).addClass('explanation').attr('id', 'explanation').html('&nbsp;').appendTo('#frame');
+
+             setupButtons();
+
+         }
+     }
+
+     init();
+ });
+
+
+    </script>
+<body>
+</body>
+</html>

@@ -1,0 +1,21 @@
+// mixins 
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transition($trans-args) {
+    -webkit-transition: $trans-args;
+    -moz-transition: $trans-args;
+    -ms-transition: $trans-args;
+    -o-transition: $trans-args;
+    transition: $trans-args;
+} 
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
